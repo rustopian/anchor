@@ -52,13 +52,15 @@ solana-msg = { workspace = true, default-features = false, features = ["alloc"] 
 solana-program-memory.workspace = true
 solana-program-log = { workspace = true, features = ["macro"], optional = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
-solana-system-interface = { workspace = true, features = ["bincode"] }
-solana-sysvar.workspace = true
 bytemuck = { version = "1", features = ["derive"] }
 wincode = { version = "0.6", default-features = false, features = ["derive"] }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
 sha2 = "0.10"
+
+[target.'cfg(not(any(target_os = "solana", target_arch = "bpf")))'.dependencies]
+solana-system-interface = { workspace = true, features = ["bincode"] }
+solana-sysvar.workspace = true
 
 [lints.rust.unexpected_cfgs]
 level = "warn"

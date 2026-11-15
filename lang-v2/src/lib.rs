@@ -260,6 +260,9 @@ pub mod solana_program {
     }
 
     pub mod rent {
+        #[cfg(any(target_os = "solana", target_arch = "bpf"))]
+        pub use pinocchio::sysvars::rent::*;
+        #[cfg(not(any(target_os = "solana", target_arch = "bpf")))]
         pub use solana_sysvar::rent::*;
     }
 
